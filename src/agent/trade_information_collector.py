@@ -2,7 +2,7 @@ import re
 import requests
 
 from bs4 import BeautifulSoup
-from util import clean_text
+from util.string import clean_text
 from typing import List
 from model.trade_information import TradeInformation
 
