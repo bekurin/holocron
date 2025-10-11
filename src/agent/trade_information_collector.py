@@ -5,14 +5,15 @@ from bs4 import BeautifulSoup
 from util.string import clean_text
 from typing import List
 from model.trade_information import TradeInformation
+from util.contant import NAVER_FINANCIAL_BASE_URL
 
 
-class TradeInformationCollectorAgent:
+class tradeInformationCollectorAgent:
     """KOSPI 100 종목의 기본 거래 정보를 수집하는 에이전트"""
 
     def __init__(self) -> None:
         self.name = "Trade Information Collector Agent"
-        self.base_url = "https://finance.naver.com/sise/entryJongmok.naver"
+        self.base_url = NAVER_FINANCIAL_BASE_URL
         self.params = {"type": "KPI100"}
         self.trade_informations: List[TradeInformation] = []
         self.headers = {
