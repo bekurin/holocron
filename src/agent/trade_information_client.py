@@ -1,7 +1,7 @@
 import json
 import requests
 from dto.trade_information_creation_request import TradeInformationCreationRequest
-from model.trade_information import TradeInformation  # 경로에 맞게 수정하세요
+from model.trade_information import TradeInformation
 
 
 def save_trade_informations(base_url: str, trade_informations: list[TradeInformation]):
