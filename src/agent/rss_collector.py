@@ -1,7 +1,6 @@
 import requests
 import feedparser
-import time
-from datetime import datetime, timedelta
+from datetime import datetime
 from typing import List
 from model.news_information import NewsInformation
 from util.contant import GOOGLE_RSS_URL
