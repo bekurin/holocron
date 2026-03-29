@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KOSPI VWAP Signal Analyzer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- PapaParse CDN for parsing CSV -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="glass-header">
+            <div class="logo">
+                <div class="logo-icon">V</div>
+                <h1>VWAP Signal Analyzer</h1>
+            </div>
+            <div class="controls">
+                <div class="control-group">
+                    <label for="vwap-period">VWAP 기간 (일)</label>
+                    <select id="vwap-period">
+                        <option value="5">5일 (단기)</option>
+                        <option value="10">10일</option>
+                        <option value="20" selected>20일 (스윙)</option>
+                        <option value="60">60일 (중기)</option>
+                        <option value="120">120일 (장기)</option>
+                    </select>
+                </div>
+                <div class="control-group">
+                    <label for="filter-signal">신호 필터</label>
+                    <select id="filter-signal">
+                        <option value="all">전체 보기</option>
+                        <option value="breakout">상승 돌파 (매수)</option>
+                        <option value="uptrend">상승 추세 유지</option>
+                        <option value="downtrend">하락 추세</option>
+                        <option value="breakdown">하락 돌파 (매도)</option>
+                    </select>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main>
+            <!-- Dashboard Stats -->
+            <section class="dashboard">
+                <div class="stat-card breakout-card">
+                    <div class="stat-icon">🔥</div>
+                    <div class="stat-info">
+                        <h3>상승 돌파 (Breakout)</h3>
+                        <p id="stat-breakout" class="stat-number">0</p>
+                    </div>
+                    <div class="stat-label">오늘 VWAP 상향 돌파</div>
+                </div>
+                <div class="stat-card uptrend-card">
+                    <div class="stat-icon">📈</div>
+                    <div class="stat-info">
+                        <h3>상승 추세 (Uptrend)</h3>
+                        <p id="stat-uptrend" class="stat-number">0</p>
+                    </div>
+                    <div class="stat-label">VWAP 위에서 종가 마감</div>
+                </div>
+                <div class="stat-card breakdown-card">
+                    <div class="stat-icon">⚠️</div>
+                    <div class="stat-info">
+                        <h3>하락 돌파 (Breakdown)</h3>
+                        <p id="stat-breakdown" class="stat-number">0</p>
+                    </div>
+                    <div class="stat-label">오늘 VWAP 하향 돌파</div>
+                </div>
+                <div class="stat-card downtrend-card">
+                    <div class="stat-icon">📉</div>
+                    <div class="stat-info">
+                        <h3>하락 추세 (Downtrend)</h3>
+                        <p id="stat-downtrend" class="stat-number">0</p>
+                    </div>
+                    <div class="stat-label">VWAP 아래에서 종가 마감</div>
+                </div>
+            </section>
+
+            <!-- Loading State -->
+            <div id="loading" class="loading-state">
+                <div class="spinner"></div>
+                <h2>데이터를 불러오고 분석 중입니다...</h2>
+                <p>약 200개 종목의 2년 치 데이터를 처리합니다.</p>
+            </div>
+
+            <!-- Signal Table -->
+            <section class="table-section">
+                <div class="table-header">
+                    <h2>VWAP 신호 결과 (<span id="result-count">0</span>종목)</h2>
+                    <span class="last-updated">최근 기준일: <strong id="last-date">로딩중</strong></span>
+                </div>
+                <div class="table-container">
+                    <table id="signal-table">
+                        <thead>
+                            <tr>
+                                <th>종목코드</th>
+                                <th>종목명</th>
+                                <th>현재가(종가)</th>
+                                <th>VWAP (<span id="vwap-label-header">20일</span>)</th>
+                                <th>이격도 (%)</th>
+                                <th>오늘 거래량 증감</th>
+                                <th>신호 상태</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table-body">
+                            <!-- Rows generated by JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
