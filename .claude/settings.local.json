@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(/Users/righteous/Developer/holocron/venv/bin/pip list:*)",
+      "Bash(tree:*)"
+    ]
+  }
+}
